@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}ITest{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="bi-back"></i>
+            <span>ITest</span>
+        </a>
+
+        <div class="d-lg-none ms-auto me-4">
+            <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-lg-5 me-lg-auto">
+                <li class="nav-item">
+                    <a class="nav-link click-scroll" href="#section_1">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link click-scroll" href="#section_2">Testing</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link click-scroll" href="#section_3">Add Test</a>
+                </li>
+
+            </ul>
+
+            <div class="d-none d-lg-block">
+                <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8 col-12 mx-auto">
+                <h1 class="text-white text-center">Учись. Развивайся.</h1>
+                <h6 class="text-center">поможет для подготовки к техническим собеседованиям</h6>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="featured-section">
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col-lg-6 col-12">
+                <div class="custom-block custom-block-overlay">
+                    <div class="d-flex flex-column h-100">
+
+                        <div class="custom-block-overlay-text d-flex">
+                            <div>
+
+                                <p class="text-white">Данный сервис поможет Вам теоретически подготовиться к техническому собеседованию в IT компании. Мы понимаем, что собеседование в IT сфере может быть требовательным и вызывающим стресс испытанием. Поэтому наша цель - сделать этот опыт для вас максимально комфортным и успешным.</p>
+
+                            </div>
+                        </div>
+
+                        <div class="section-overlay"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}
