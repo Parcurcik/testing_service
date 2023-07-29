@@ -12202,4 +12202,20 @@ textarea.form-control-lg {
     }
 }
 
+/* Custom styles for the "Выход" button */
+.custom-logout-btn {
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #000;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.custom-logout-btn:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+
 /*# sourceMappingURL=bootstrap.min.css.map */

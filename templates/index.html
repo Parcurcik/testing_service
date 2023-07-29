@@ -1,82 +1,175 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}ITest{% endblock %}
 
 {% block content %}
-<nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <a class="navbar-brand" href="/">
-            <i class="bi-back"></i>
-            <span>ITest</span>
-        </a>
 
-        <div class="d-lg-none ms-auto me-4">
-            <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
-        </div>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="bi-back"></i>
+                <span>ITest</span>
+            </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-lg-5 me-lg-auto">
-                <li class="nav-item">
-                    <a class="nav-link click-scroll" href="#section_1">Home</a>
-                </li>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <li class="nav-item">
-                    <a class="nav-link click-scroll" href="#section_2">Testing</a>
-                </li>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-lg-5 me-lg-auto">
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="#section_1">О нас</a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link click-scroll" href="#section_3">Add Test</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="#section_2">Тесты</a>
+                    </li>
 
-            </ul>
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="#section_3">Добавить тест</a>
+                    </li>
 
-            <div class="d-none d-lg-block">
-                <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
+                </ul>
+                {% if user.is_authenticated %}
+
+                    <div class="ms-auto me-4">
+                        <a href="{% url 'logout' %}" class="btn custom-btn mt-3 mt-lg-4">Выход</a>
+                    </div>
+                {% else %}
+                    <div>
+                        <a href="#top" class="navbar-icon bi-person smoothscroll" data-bs-toggle="modal"
+                           data-bs-target="#authModal"></a>
+                    </div>
+                {% endif %}
+
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-<section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
-    <div class="container">
-        <div class="row">
+    <section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
+        <div class="container">
+            <div class="row">
 
-            <div class="col-lg-8 col-12 mx-auto">
-                <h1 class="text-white text-center">Учись. Развивайся.</h1>
-                <h6 class="text-center">поможет для подготовки к техническим собеседованиям</h6>
+                <div class="col-lg-8 col-12 mx-auto">
+                    <h1 class="text-white text-center">Войди в IT</h1>
+                    <h6 class="text-center">поможет для подготовки к техническим собеседованиям</h6>
+                </div>
+
             </div>
-
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="featured-section">
-    <div class="container">
-        <div class="row justify-content-center">
+    <section class="featured-section">
+        <div class="container">
+            <div class="row justify-content-center">
 
-            <div class="col-lg-6 col-12">
-                <div class="custom-block custom-block-overlay">
-                    <div class="d-flex flex-column h-100">
+                <div class="col-lg-6 col-12">
+                    <div class="custom-block custom-block-overlay">
+                        <div class="d-flex flex-column h-100">
 
-                        <div class="custom-block-overlay-text d-flex">
-                            <div>
+                            <div class="custom-block-overlay-text d-flex">
+                                <div>
 
-                                <p class="text-white">Данный сервис поможет Вам теоретически подготовиться к техническому собеседованию в IT компании. Мы понимаем, что собеседование в IT сфере может быть требовательным и вызывающим стресс испытанием. Поэтому наша цель - сделать этот опыт для вас максимально комфортным и успешным.</p>
+                                    <p class="text-white">Наш сервис дает Вам возможность стать не только тестируемым,
+                                        но и тестировщиком. Вы можете создавать собственные тесты на айти-темы, которые
+                                        помогут Вам подготовиться к собеседованиям в IT компаниях. Персонализированные
+                                        тесты помогут максимально эффективно преодолеть вызовы
+                                        технических собеседований. Мы верим, что Ваша подготовка - в Ваших руках!</p>
 
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="section-overlay"></div>
+                            <div class="section-overlay"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="authModalLabel">Вход в аккаунт</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center">
+                        <a href="#" class="btn btn-outline-primary me-2">
+                            <i class="fab fa-google"></i> Войти через Google
+                        </a>
+                        <a href="#" class="btn btn-outline-dark me-2">
+                            <i class="fab fa-github"></i> Войти через GitHub
+                        </a>
+                        <a href="#" class="btn btn-outline-info">
+                            <i class="fab fa-vk"></i> Войти через VK
+                        </a>
+                    </div>
+
+                    <div class="modal-header">
+                    </div>
+
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Почта</label>
+                            <input type="email" class="form-control" id="email" name="email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Пароль</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+
+                        <div class="d-grid gap-2 justify-content-center">
+                            <button type="submit" class="btn btn-primary">Войти / Зарегистрироваться</button>
+                            {% if messages %}
+                                <div class="text-danger text-center">
+                                    {% for message in messages %}
+                                        {{ message }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                    </form>
+
+
+                </div>
+            </div>
         </div>
     </div>
-</section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+
+
+    <script>
+        $(window).on('load', function () {
+            $('.navbar-icon').on('click', function () {
+                $('#authModal').modal('show');
+            });
+        });
+        $(document).ready(function () {
+            {% if messages %}
+                $('#authModal').modal('show');
+            {% endif %}
+
+            $('.navbar-icon').on('click', function () {
+                $('#authModal').modal('show');
+            });
+
+            $('#authModal').on('hidden.bs.modal', function () {
+                $('#email').val('');
+                $('#password').val('');
+            });
+        });
+    </script>
+
 {% endblock %}

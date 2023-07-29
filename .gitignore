@@ -19,7 +19,7 @@ media
 
 # AWS User-specific
 .idea/**/aws.xml
-
+testing/migrations
 # Generated files
 .idea/**/contentModel.xml
 
@@ -135,3 +135,4 @@ GitHub.sublime-settings
 !.vscode/launch.json
 !.vscode/extensions.json
 .history
+/testing/migrations/
