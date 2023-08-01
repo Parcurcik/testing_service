@@ -12217,5 +12217,8 @@ textarea.form-control-lg {
     color: #fff;
 }
 
+.navbar-nav .nav-item a.active {
+    color: gray;
+}
 
 /*# sourceMappingURL=bootstrap.min.css.map */

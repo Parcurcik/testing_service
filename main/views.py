@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -34,8 +35,9 @@ def logout_view(request):
     return redirect('index')
 
 
+@login_required()
 def tests(requests):
-    print('ВСЕ ТЕСТЫ')
+    return render(requests, 'test_pages.html')
 
 
 def add_test(requests):
