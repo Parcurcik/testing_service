@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from .models import TestSet
 
 
 def index(request):
@@ -35,9 +36,14 @@ def logout_view(request):
     return redirect('index')
 
 
-@login_required()
-def tests(requests):
-    return render(requests, 'test_pages.html')
+@login_required
+def tests(request):
+    test_sets = TestSet.objects.all()
+    return render(request, 'test_pages.html', {'test_sets': test_sets})
+
+
+def test(requests):
+    return render(requests, 'test_view.html')
 
 
 def add_test(requests):

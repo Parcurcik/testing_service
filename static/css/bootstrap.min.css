@@ -12221,4 +12221,17 @@ textarea.form-control-lg {
     color: gray;
 }
 
+.custom-block-topics-listing-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Равномерное распределение по вертикали */
+    align-items: center; /* Выравнивание по горизонтали */
+    min-height: 20vh;
+    padding: 20px;
+}
+
+
+
+
+
 /*# sourceMappingURL=bootstrap.min.css.map */
