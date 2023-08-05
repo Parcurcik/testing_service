@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import TestSet
+from .models import TestSet, UserTest, UserAnswer
+from .forms import QuestionForm
 
 
 def index(request):
@@ -42,8 +43,35 @@ def tests(request):
     return render(request, 'test_pages.html', {'test_sets': test_sets})
 
 
-def test(requests):
-    return render(requests, 'test_view.html')
+@login_required
+def test(request, test_id):
+    test_set = get_object_or_404(TestSet, id=test_id)
+    questions = test_set.question_set.all()
+    user_test, created = UserTest.objects.get_or_create(user=request.user, test_set=test_set)
+    current_question_index = user_test.useranswer_set.count()
+
+    if current_question_index < questions.count():
+        current_question = questions[current_question_index]
+        if request.method == 'POST':
+            if 'retry' in request.POST:
+                UserAnswer.objects.filter(user_test=user_test).delete()
+                return redirect('test', test_id=test_id)
+            form = QuestionForm(request.POST, question=current_question)
+            if form.is_valid():
+                user_answer = form.cleaned_data['selected_answer']
+                user_test.useranswer_set.update_or_create(question=current_question,
+                                                          defaults={'selected_answer': user_answer})
+                return redirect('test', test_id=test_id)
+        else:
+            form = QuestionForm(question=current_question)
+    else:
+        return render(request, 'test_view.html', {'test_set': test_set, 'user_test': user_test, 'questions': questions,
+                                                  'show_result': True, 'current_question': None})
+
+    return render(request, 'test_view.html',
+                  {'test_set': test_set, 'form': form, 'current_question_index': current_question_index,
+                   'current_question': current_question})
+
 
 
 def add_test(requests):

@@ -41,7 +41,17 @@
     </nav>
 
     <header class="site-header d-flex flex-column justify-content-center align-items-center">
+        <div class="container">
+            <div class="row align-items-center">
 
+                <div class="col-lg-5 col-12">
+
+                    <h1 class="text-white">{{ test_set.title }}</h1>
+                    <p class="text-white">{{ test_set.description }}</p>
+                </div>
+
+            </div>
+        </div>
     </header>
 
 
@@ -49,32 +59,35 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-lg-12 col-12 text-center">
-                    <h3 class="mb-4">Все тесты</h3>
-                </div>
 
                 <div class="col-lg-8 col-12 mt-3 mx-auto">
-                    {% for test_set in test_sets %}
-                        <div class="custom-block custom-block-topics-listing bg-white shadow-lg mb-5 text-center">
+                    <div class="custom-block custom-block-topics-listing bg-white shadow-lg mb-5 text-center"
+                         style="margin-bottom: 65%;">
 
-                            <div class="custom-block-topics-listing-info">
-                                <div>
-                                    <h5 class="mb-2">{{ test_set.title }}</h5>
+                        <div class="custom-block-topics-listing-info">
+                            <div>
+                                {% if show_result %}
+                                    <h2>Результаты</h2>
+                                    <p>Количество правильных ответов: {{ correct_answers|length }}
+                                        / {{ questions|length }}</p>
+                                    <form action="{% url 'test' test_set.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" name="retry">Повторить тест</button>
+                                    </form>
+                                {% else %}
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <h3>{{ current_question.text }}</h3>
+                                        {{ form.selected_answer }}
+                                        <button type="submit">Next</button>
+                                    </form>
 
-                                    <p class="mb-0">{{ test_set.description }}</p>
+                                {% endif %}
 
-                                    <button class="btn custom-btn mt-3 mt-lg-4 open-modal-btn"
-                                            data-test-title="{{ test_set.title }}"
-                                            data-test-description="{{ test_set.description }}"
-                                            data-test-id="{{ test_set.id }}">Пройти
-                                    </button>
-
-                                </div>
                             </div>
                         </div>
-                    {% endfor %}
+                    </div>
                 </div>
-
 
 
                 <div class="col-lg-12 col-12">
