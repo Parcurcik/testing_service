@@ -12231,6 +12231,21 @@ textarea.form-control-lg {
 }
 
 
+.red {
+    font-weight: bold;
+    color: red;
+}
+
+.yellow {
+    font-weight: bold;
+    color: yellow;
+}
+
+.green {
+    font-weight: bold;
+    color: green;
+}
+
 
 
 

@@ -29,18 +29,11 @@
                            data-bs-target="#authModal">Тесты</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_3" data-bs-toggle="modal"
-                           data-bs-target="#authModal">Добавить тест</a>
-                        </li>
                     {% else %}
                          <li class="nav-item">
                             <a class="nav-link click-scroll" href="{%url 'tests' %}">Тесты</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="{%url 'add_test' %}">Добавить тест</a>
-                        </li>
 
                     {% endif %}
 

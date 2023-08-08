@@ -26,9 +26,6 @@
                     <li class="nav-item">
                         <a class="nav-link click-scroll" href="{% url 'tests' %}" id="tests-link">Тесты</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link click-scroll" href="{% url 'add_test' %}">Добавить тест</a>
-                    </li>
                 </ul>
 
 
@@ -68,12 +65,15 @@
                             <div>
                                 {% if show_result %}
                                     <h2>Результаты</h2>
-                                    <p>Количество правильных ответов: {{ correct_answers|length }}
+                                    <p>Количество правильных ответов: {{ correct_answers }}
                                         / {{ questions|length }}</p>
-                                    <form action="{% url 'test' test_set.id %}" method="post">
-                                        {% csrf_token %}
-                                        <button type="submit" name="retry">Повторить тест</button>
-                                    </form>
+                                    <p>Процент выполнения:</p>
+                                    <p class="{% if find_percent < 40 %}red{% elif find_percent >= 40 and find_percent < 70 %}yellow{% else %}green{% endif %}">
+                                        {{ find_percent }}%
+                                    </p>
+                                    <button class="btn custom-btn mt-3 mt-lg-4 delete-answers-btn"
+                                            data-test-id="{{ test_set.id }}">Пройти еще раз
+                                    </button>
                                 {% else %}
                                     <form method="post">
                                         {% csrf_token %}
@@ -98,6 +98,30 @@
         </div>
     </section>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteButtons = document.querySelectorAll('.delete-answers-btn');
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const testId = this.getAttribute('data-test-id');
+                    fetch(`/test/${testId}/delete_user_answers/`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}',  // Замените на корректный способ получения CSRF-токена
+                        },
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                // Перезагрузите страницу после успешного удаления
+                                window.location.reload();
+                            }
+                        });
+                });
+            });
+        });
+
+    </script>
 
 
 
