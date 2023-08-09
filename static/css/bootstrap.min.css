@@ -12233,20 +12233,72 @@ textarea.form-control-lg {
 
 .red {
     font-weight: bold;
-    color: red;
+    color: #fc0000;
 }
 
 .yellow {
     font-weight: bold;
-    color: yellow;
+    color: #fae100;
 }
 
 .green {
     font-weight: bold;
-    color: green;
+    color: #05fa57;
 }
 
 
+.custom-block-topics-listing-info h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.custom-block-topics-listing-info p {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.custom-block-topics-listing-info button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+
+.custom-block-topics-listing-info form {
+    margin-top: 20px;
+}
+
+.custom-block-topics-listing-info h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.custom-block-topics-listing-info label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.custom-block-topics-listing-info select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 14px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Вы можете настроить это значение в зависимости от ваших потребностей */
+}
 
 
 /*# sourceMappingURL=bootstrap.min.css.map */

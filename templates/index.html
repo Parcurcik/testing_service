@@ -26,12 +26,12 @@
                     {% if not user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link click-scroll" href="#section_2" data-bs-toggle="modal"
-                           data-bs-target="#authModal">Тесты</a>
+                               data-bs-target="#authModal">Тесты</a>
                         </li>
 
                     {% else %}
-                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="{%url 'tests' %}">Тесты</a>
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="{% url 'tests' %}">Тесты</a>
                         </li>
 
 
@@ -78,8 +78,7 @@
                             <div class="custom-block-overlay-text d-flex">
                                 <div>
 
-                                    <p class="text-white">Наш сервис дает Вам возможность стать не только тестируемым,
-                                        но и тестировщиком. Вы можете создавать собственные тесты на айти-темы, которые
+                                    <p class="text-white">Наш сервис дает Вам возможность стать тестируемым. Вы сможете пройти различные тесты на айти-темы, которые
                                         помогут Вам подготовиться к собеседованиям в IT компаниях. Персонализированные
                                         тесты помогут максимально эффективно преодолеть вызовы
                                         технических собеседований. Мы верим, что Ваша подготовка - в Ваших руках!</p>
@@ -138,7 +137,7 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+    <script src="https://stackpatрh.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 
 
     <script>

@@ -7,7 +7,7 @@
 
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" href="/tests/">
                 <i class="bi-terminal"></i>
                 <span>ITest</span>
             </a>
@@ -58,41 +58,35 @@
 
 
                 <div class="col-lg-8 col-12 mt-3 mx-auto">
-                    <div class="custom-block custom-block-topics-listing bg-white shadow-lg mb-5 text-center"
+                    <div class="custom-block custom-block-topics-listing bg-white shadow-lg mb-5 text-center mx-auto text-left"
                          style="margin-bottom: 65%;">
-
-                        <div class="custom-block-topics-listing-info">
-                            <div>
-                                {% if show_result %}
-                                    <h2>Результаты</h2>
-                                    <p>Количество правильных ответов: {{ correct_answers }}
-                                        / {{ questions|length }}</p>
-                                    <p>Процент выполнения:</p>
-                                    <p class="{% if find_percent < 40 %}red{% elif find_percent >= 40 and find_percent < 70 %}yellow{% else %}green{% endif %}">
-                                        {{ find_percent }}%
-                                    </p>
-                                    <button class="btn custom-btn mt-3 mt-lg-4 delete-answers-btn"
-                                            data-test-id="{{ test_set.id }}">Пройти еще раз
+                        <div class="custom-block-topics-listing-info mx-auto" style="text-align: left">
+                            {% if show_result %}
+                                <h2>Результаты</h2>
+                                <p>Количество правильных ответов: {{ correct_answers }} / {{ questions|length }}</p>
+                                <p>Процент выполнения:</p>
+                                <p class="{% if find_percent <= 40 %}red{% elif find_percent > 40 and find_percent < 70 %}yellow{% else %}green{% endif %}">
+                                    {{ find_percent }}%
+                                </p>
+                                <div class="button-container">
+                                    <button class="btn custom-btn delete-answers-btn" data-test-id="{{ test_set.id }}">
+                                        Пройти еще раз
                                     </button>
-                                {% else %}
-                                    <form method="post">
-                                        {% csrf_token %}
-                                        <h3>{{ current_question.text }}</h3>
-                                        {{ form.selected_answer }}
+                                </div>
+                            {% else %}
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <h3>{{ current_question.text }}</h3>
+                                    {{ form.selected_answer }}
+                                    <div class="button-container">
                                         <button type="submit">Next</button>
-                                    </form>
-
-                                {% endif %}
-
-                            </div>
+                                    </div>
+                                </form>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
 
-
-                <div class="col-lg-12 col-12">
-                    <!-- Pagination code -->
-                </div>
 
             </div>
         </div>
@@ -108,18 +102,21 @@
                     fetch(`/test/${testId}/delete_user_answers/`, {
                         method: 'POST',
                         headers: {
-                            'X-CSRFToken': '{{ csrf_token }}',  // Замените на корректный способ получения CSRF-токена
+                            'X-CSRFToken': '{{ csrf_token }}',
                         },
                     })
                         .then(response => {
                             if (response.ok) {
-                                // Перезагрузите страницу после успешного удаления
                                 window.location.reload();
                             }
                         });
                 });
             });
         });
+        window.onload = function () {
+            // Прокрутка страницы вниз на заданный отступ (например, 200 пикселей)
+            window.scrollTo(0, 200); // Замените 200 на желаемое значение прокрутки
+        };
 
     </script>
 

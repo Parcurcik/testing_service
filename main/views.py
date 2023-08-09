@@ -3,9 +3,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import TestSet, UserTest, UserAnswer
+from .models import TestSet, UserTest
 from .forms import QuestionForm
-import random
 
 
 def index(request):
@@ -55,7 +54,6 @@ def test(request, test_id):
 
     find_percent = int(int(correct_answers) / len(questions) * 100)
 
-
     if current_question_index < questions.count():
         current_question = questions[current_question_index]
         if request.method == 'POST':
@@ -81,7 +79,5 @@ def test(request, test_id):
 def delete_user_answers(request, test_id):
     test_set = get_object_or_404(TestSet, id=test_id)
     user_test = get_object_or_404(UserTest, user=request.user, test_set=test_set)
-
     user_test.useranswer_set.all().delete()
-
     return redirect('test', test_id=test_id)
