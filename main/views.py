@@ -46,15 +46,14 @@ def tests(request):
 @login_required
 def test(request, test_id):
     test_set = get_object_or_404(TestSet, id=test_id)
-    questions = test_set.question_set.all()
+    questions = list(test_set.question_set.all())
     user_test, created = UserTest.objects.get_or_create(user=request.user, test_set=test_set)
     user_answers = user_test.useranswer_set.all()
     correct_answers = sum(user_answer.selected_answer.is_correct for user_answer in user_answers)
     current_question_index = user_answers.count()
-
     find_percent = int(int(correct_answers) / len(questions) * 100)
-
-    if current_question_index < questions.count():
+    num_questions = len(questions)
+    if current_question_index < num_questions:
         current_question = questions[current_question_index]
         if request.method == 'POST':
             form = QuestionForm(request.POST, question=current_question)
@@ -69,7 +68,6 @@ def test(request, test_id):
         return render(request, 'test_view.html', {'test_set': test_set, 'user_test': user_test, 'questions': questions,
                                                   'show_result': True, 'current_question': None,
                                                   'correct_answers': correct_answers, 'find_percent': find_percent})
-
     return render(request, 'test_view.html',
                   {'test_set': test_set, 'form': form, 'current_question_index': current_question_index,
                    'current_question': current_question, 'correct_answers': correct_answers})

@@ -69,17 +69,19 @@
                                     {{ find_percent }}%
                                 </p>
                                 <div class="button-container">
-                                    <button class="btn custom-btn delete-answers-btn" data-test-id="{{ test_set.id }}">
+                                    <a class="btn custom-btn delete-answers-btn"
+                                       data-test-id="{{ test_set.id }}">
                                         Пройти еще раз
-                                    </button>
+                                    </a>
                                 </div>
+
                             {% else %}
                                 <form method="post">
                                     {% csrf_token %}
                                     <h3>{{ current_question.text }}</h3>
                                     {{ form.selected_answer }}
                                     <div class="button-container">
-                                        <button type="submit">Next</button>
+                                        <button type="submit" >Далее</button>
                                     </div>
                                 </form>
                             {% endif %}
